@@ -1,4 +1,4 @@
-/* usamos o root para organizar variáveis globais - meio que uma atalho para cores e sombras */
+/* usamos o root para organizar variáveis globais - meio que um atalho para cores e sombras */
 :root {
     --fundo-rosa-claro: #fff0f6;
     --rosa-escuro: #c77dbb;
@@ -24,7 +24,7 @@ body {
 /* BARRA DE NAVEGAÇÃO */
 .cabecalho {
     display: flex;
-    justify-content: space-between; /* logo na esquerda, Menu na direita */
+    justify-content: space-between; /* logo na esquerda, menu na direita */
     align-items: center;
     padding: 1rem 5%;
     background: white;
