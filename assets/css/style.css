@@ -1,0 +1,373 @@
+/* usamos o root para organizar variáveis globais - meio que uma atalho para cores e sombras */
+:root {
+    --fundo-rosa-claro: #fff0f6;
+    --rosa-escuro: #c77dbb;
+    --roxo-escuro: #4a314d;
+    --texto-cinza: #8e7a8f;
+    --sombra-card: 0 10px 30px rgba(74, 49, 77, 0.05);
+}
+
+/* reset básico: remove margens padrão e garante que o padding não aumente o tamanho dos elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--fundo-rosa-claro);
+    color: var(--roxo-escuro);
+    line-height: 1.6; /* melhora a leitura aumentando o espaço entre linhas */
+}
+
+/* BARRA DE NAVEGAÇÃO */
+.cabecalho {
+    display: flex;
+    justify-content: space-between; /* logo na esquerda, Menu na direita */
+    align-items: center;
+    padding: 1rem 5%;
+    background: white;
+    box-shadow: 0 2px 10px rgba(74, 49, 77, 0.1);
+    position: relative; 
+    z-index: 1000; /* garante que o menu fique acima de qualquer card ao rolar */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo h1 a {
+    text-decoration: none;
+    color: var(--rosa-escuro);
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.cabecalho ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none; /* remove as bolinhas da lista */
+}
+
+.cabecalho ul li a {
+    text-decoration: none;
+    color: var(--texto-cinza);
+    font-weight: 500;
+    transition: 0.3s; /* suaviza a mudança de cor no hover */
+}
+
+.cabecalho ul li a.active, .cabecalho ul li a:hover {
+    color: var(--rosa-escuro);
+}
+
+/* BOAS VINDAS */
+.boas-vindas {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.boas-vindas h2 {
+    font-size: 2.5rem;
+    color: var(--rosa-escuro);
+    margin-bottom: 0.5rem;
+}
+
+.boas-vindas p {
+    color: var(--texto-cinza);
+    font-size: 1.1rem;
+}
+
+/* CARD DE DESTAQUE (GRANDE) */
+.artigo-principal {
+    background: white;
+    max-width: 1136px;
+    margin: 0 auto 4rem; /* centraliza o card e dá espaço para o conteúdo abaixo */
+    display: flex; /* coloca imagem e texto lado a lado */
+    border-radius: 2.5rem;
+    overflow: hidden; /* garante que a imagem respeite o arredondamento do card */
+    box-shadow: var(--sombra-card);
+    height: 450px; /* altura fixa para manter o padrão no computador */
+}
+
+.metadados {
+    display: flex;
+    gap: 1.5rem;
+    color: var(--texto-cinza);
+    font-size: 0.9rem;
+    align-items: center;
+}
+
+.metadados i {
+    color: var(--texto-cinza);
+    opacity: 0.8; /* opcional: deixa o ícone levemente mais discreto que o texto */
+}
+
+.imagem-container {
+    width: 50%;
+    height: 100%;
+    position: relative; /* necessário para posicionar o badge (etiqueta) lá dentro */
+    flex-shrink: 0; /* impede que o texto esprema a imagem */
+}
+
+.imagem-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* preenche o espaço da imagem sem esticar ou sobrar bordas brancas */
+}
+
+.badge-destaque {
+    position: absolute; /* o badge flutua sobre a imagem */
+    top: 20px;
+    left: 20px;
+    background: rgba(199, 125, 187, 0.9);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.texto-artigo {
+    width: 50%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column; /* organiza título, resumo e rodapé um abaixo do outro */
+    overflow: hidden;
+    gap: 1rem; /* espaço uniforme entre os elementos internos */
+}
+
+.titulo-artigoprincipal {
+    font-size: 1.8rem;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.resumo-artigo {
+    color: var(--texto-cinza);
+    flex-grow: 1;          /* força o resumo a esticar e ocupar o centro */
+    display: flex;         /* transforma o resumo em flex também */
+    align-items: center;   /* centraliza o texto verticalmente no espaço que ele ganhou */
+    line-height: 1.6;
+}
+
+
+/* parte criada para agrupar autora/data e o botão */
+.rodape-artigo {
+    margin-top: auto; /* empurra essa parte para o final do card, não importa o tamanho do texto */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.botao-ler-mais {
+    background: #e0a3d4;
+    color: white;
+    text-decoration: none;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    width: fit-content; /* o botão só cresce o necessário para o texto */
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.botao-ler-mais:hover {
+    background: var(--rosa-escuro);
+    transform: translateY(-2px); /* efeito de flutuação ao passar o mouse */
+}
+
+/* Títulos das colunas (Artigos Recentes e Sidebar) */
+.titulo-secao {
+    font-size: 1.5rem;
+    color: var(--roxo-escuro);
+    margin-bottom: 2rem; /* espaço para os cards não ficarem "colados" no título */
+    font-weight: 700;
+}
+
+/* GRID DE CONTEÚDO (Artigos + Sidebar) */
+.container-grid-principal {
+    display: grid;
+    grid-template-columns: 1fr 350px; /* coluna maior para artigos, menor para comentários, uma ocupa 50% a outra 350px */
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* CARDS PEQUENOS DE ARTIGOS */
+.grid-artigos {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* dois cards por linha! */
+    gap: 2rem;
+}
+
+.card-artigo {
+    background: white;
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: var(--sombra-card);
+    transition: 0.3s;
+}
+
+.card-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* mantém a proporção 16/9 */
+    overflow: hidden;
+    position: relative;
+}
+
+.card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.category-tag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    color: white;
+    background-color: #b366a3;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--texto-cinza);
+}
+
+/* ESTILO DO LINK LER MAIS NOS CARDS PEQUENOS */
+.link-artigo {
+    color: var(--rosa-escuro);
+    text-decoration: none; /* remove a linha embaixo do link */
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* espaço entre o texto e a setinha */
+}
+
+/* SEÇÃO LATERAL (COMENTÁRIOS/POSTS) */
+.post-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    display: flex; /* avatar na esquerda, texto na direita */
+    gap: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--sombra-card);
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    background: #d8b4d8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white; /* ícone/letra do usuário fica branco */
+    font-weight: bold;
+    flex-shrink: 0; /* impede que o círculo do avatar seja esticado e vire oval */
+}
+
+/* Ícones de ação da sidebar (coração, comentário, share) */
+.post-actions i {
+    color: var(--texto-cinza); /* define a cor cinza para os ícones da lateral */
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.post-actions i:hover {
+    color: var(--rosa-escuro); /* muda para rosa ao passar o mouse */
+}
+
+/* RODAPÉ FINAL */
+.rodape-gradiente {
+    margin-top: 5rem;
+    background: #e8a7d3;
+    padding: 4rem 1rem;
+    text-align: center;
+    color: white;
+}
+
+/* --- RESPONSIVIDADE / MEDIA QUERY (COMO O SITE FICA EM CELULARES) --- */
+@media (max-width: 768px) {
+    /* isso aqui impede que a tela balance para os lados */
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    /* empilha logo e links verticalmente */
+    .cabecalho {
+        flex-direction: column; 
+        padding: 1.5rem 1rem;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .cabecalho ul {
+        gap: 1rem;
+        flex-wrap: wrap; /* caso os itens do menu sejam muitos, eles quebram linha */
+        justify-content: center;
+    }
+
+    /* margem de segurança para nada encostar na borda física do celular */
+    .conteudo {
+        padding: 0 1rem;
+    }
+
+    /* transforma o destaque de lado-a-lado em empilhado */
+    .artigo-principal {
+        flex-direction: column;
+        height: auto; /* card cresce conforme o texto */
+        max-width: 450px;
+        margin: 0 auto 2.5rem;
+    }
+
+    .imagem-container {
+        width: 100%;
+        height: 200px; /* reduz altura da imagem para não "comer" a tela toda */
+    }
+
+    .texto-artigo {
+        width: 100%; /* agora o texto usa 100% da largura, e não mais os 50% do desktop */
+    }
+
+    /* muda o grid de 2 colunas para 1 coluna só que nem o professor pediu */
+    .container-grid-principal {
+        grid-template-columns: 1fr;
+        padding: 0;
+    }
+
+    .grid-artigos {
+        grid-template-columns: 1fr;
+        justify-items: center; /* centraliza os cards no meio da tela */
+    }
+
+    /* padroniza a largura dos cards no mobile para ficarem alinhados */
+    .card-artigo, .post-card {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    /* centraliza a sidebar de comentários que agora está lá embaixo */
+    .secao-posts {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
